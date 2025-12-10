@@ -1,0 +1,47 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual Environment
+venv/
+env/
+ENV/
+.env
+.venv/
+
+# Streamlit
+.streamlit/
+*.ckpt
+*.pt
+
+# Credentials (MUY IMPORTANTE)
+credentials.json
+client_secret*.json
+
+# VS Code
+.vscode/
+
+# GMS Scraper specific
+temp_downloads/
+*.zip
+*.csv
