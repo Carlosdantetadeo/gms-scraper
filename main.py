@@ -31,6 +31,16 @@ except Exception:
     _rembg_remove = None
     _rembg_new_session = None
 
+# Cargar variables de entorno desde .env.local si existe
+_env_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), ".env.local")
+if os.path.exists(_env_path):
+    with open(_env_path, "r", encoding="utf-8") as _ef:
+        for _line in _ef:
+            _line = _line.strip()
+            if _line and not _line.startswith("#") and "=" in _line:
+                _k, _v = _line.split("=", 1)
+                os.environ.setdefault(_k.strip(), _v.strip())
+
 # --- CONFIGURACIÓN DE PÁGINA ---
 st.set_page_config(page_title="GMS Scraper Intelligence", layout="wide", page_icon="🕵️‍♂️")
 
@@ -282,7 +292,7 @@ uploaded_file = st.sidebar.file_uploader("Sube tu 'credentials.json'", type="jso
 sheet_name = "Productos Scrapeados"
 json_content = None
 
-local_creds_path = "credentials.json"
+local_creds_path = os.environ.get("GOOGLE_CREDENTIALS_PATH", "credentials.json")
 if uploaded_file is None and os.path.exists(local_creds_path):
     try:
         with open(local_creds_path, "r") as f:
@@ -839,7 +849,11 @@ elif mode == "4. 🌐 WEB INTEL (Apify Powered)":
     st.subheader("4. 🌐 Scraper Inteligente via Apify")
     st.info("Utiliza herramientas de Apify para scrapear sitios complejos (Instagram, Google Maps, etc.)")
 
-    api_token = st.text_input("Apify API Token", type="password", help="Consigue uno en apify.com")
+    api_token = st.text_input(
+        "Apify API Token", type="password",
+        value=os.environ.get("APIFY_TOKEN", ""),
+        help="Consigue uno en apify.com · También puedes definirlo en .env.local"
+    )
 
     actor_id = st.selectbox("Selecciona el Actor", [
         "apify/web-scraper",
