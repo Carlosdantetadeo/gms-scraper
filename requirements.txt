@@ -6,3 +6,12 @@ requests
 beautifulsoup4
 webdriver-manager
 pandas
+pymupdf
+apify-client
+rembg
+easyocr
+Pillow
+numpy
+scipy
+sentence-transformers
+youtube-transcript-api

@@ -45,3 +45,9 @@ client_secret*.json
 temp_downloads/
 *.zip
 *.csv
+
+# Debug / herramientas internas
+check_apify.py
+test_imports.py
+skills-lock.json
+.agents/
